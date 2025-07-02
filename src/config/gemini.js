@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
-// const apikey = "AIzaSyCbhZUtCbn7WTJroFK-3l7RChONjrj-z4o";
+
 // npm install @google/generative-ai
 
 // const {
