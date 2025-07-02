@@ -11,7 +11,7 @@ import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/ge
 // const MODEL_NAME = "gemini-1.0-pro";
 
 const MODEL_NAME = "gemini-1.5-flash"; // Updated to the latest model version
-const API_KEY = "Your_API";
+const API_KEY = "Your_API"; // It should be Private 
 
 async function runChat(prompt) {
     const genAI = new GoogleGenerativeAI(API_KEY);
