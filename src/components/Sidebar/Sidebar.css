@@ -1,0 +1,79 @@
+.sidebar{
+    min-height: 100vh;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f0f4f9;
+    /* /* overflow: hidden; */
+    padding: 25px 15px ; 
+}
+.sidebar img{
+    width:20px ;
+}
+.sidebar .menu{
+    display: block;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.sidebar .new-chat{
+    margin-top: 50px; /*20*/
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background-color: #e6eaf1;
+    border-radius: 50px;
+    font-size:14px;
+    color:grey;
+    cursor: pointer;
+}
+.sidebar .recent{
+    display: flex;
+    flex-direction: column; 
+    animation: fadeIn 1.5s; 
+    /* flex: 1; Takes all remaining space */
+    /* overflow-y: auto; Allows scrolling ONLY here if content overflows */
+    /* margin: 10px 0; Optional: Add margin for spacing   */
+}
+.sidebar .recent-title{
+    margin-top: 30px; /*15px*/
+    margin-bottom: 20px; /*10px*/
+}
+.sidebar .recent-entry{
+    display: flex;
+    align-items: start; /*Center*/
+    gap: 10px;
+    padding: 10px;
+    padding-right: 40px;
+    border-radius: 50px;
+    color: #282828;
+    cursor: pointer;
+}
+.sidebar .recent-entry:hover{
+    background-color: #e2e6eb;  
+}
+/* .sidebar .recent-entry img {
+    flex-shrink: 0; /* Prevents image from shrinking */
+    /* width: 20px; Optional: Set fixed width */
+/* } */ 
+/* /* .sidebar .recent-entry p {
+    margin: 0; /* Remove default paragraph margins */
+    /* white-space: nowrap; Prevents text wrapping */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; Adds ... if text overflows */
+/* } */  */
+.sidebar .bottom{
+    /* margin-top: auto; */
+    display: flex;
+    flex-direction: column;
+}
+.sidebar .bottom-item{
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px){
+    .sidebar{
+        display: none; 
+    }
+}
