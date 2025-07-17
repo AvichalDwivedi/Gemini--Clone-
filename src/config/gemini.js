@@ -1,67 +1,80 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
-// const apikey = "AIzaSyCbhZUtCbn7WTJroFK-3l7RChONjrj-z4o";
-// npm install @google/generative-ai
 
-// const {
-//     GoogleGenerativeAI,
-//     HarmCategory,
-//     HarmBlockThreshold,
-// } = require("@google/generative-ai");
+// Configuration
+const MODEL_NAME = "gemini-1.5-flash";
+const DEFAULT_API_KEY = "your-default-key-here"; // Remove this in production!
 
-// const MODEL_NAME = "gemini-1.0-pro";
+// Get API key based on environment
+const API_KEY = import.meta.env?.VITE_GEMINI_API_KEY || DEFAULT_API_KEY;
 
-const MODEL_NAME = "gemini-1.5-flash"; // Updated to the latest model version
-const API_KEY = "AIzaSyCbhZUtCbn7WTJroFK-3l7RChONjrj-z4o";
+if (!API_KEY || API_KEY === "your-default-key-here") {
+  console.error("API key is not properly configured");
+  // You might want to throw an error here in production
+}
 
 async function runChat(prompt) {
+  // Validate input
+  if (!prompt || typeof prompt !== 'string') {
+    throw new Error("Invalid prompt provided");
+  }
+
+  try {
+    // Initialize the Generative AI
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({ model: MODEL_NAME });
 
+    // Configuration
     const generationConfig = {
-        temperature: 0.9,
-        topK: 1,
-        topP: 1,
-        maxOutputTokens: 2048,
+      temperature: 0.9,
+      topK: 1,
+      topP: 1,
+      maxOutputTokens: 2048,
     };
 
     const safetySettings = [
-        {
-            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
-        {
-            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-            threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-        },
+      {
+        category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      },
+      {
+        category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+        threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+      },
     ];
 
+    // Start chat session
     const chat = model.startChat({
-        generationConfig,
-        safetySettings,
-        history: [],
+      generationConfig,
+      safetySettings,
+      history: [],
     });
 
-    // const result = await chat.sendMessage(prompt);
-    // const response = result.response;
-    // console.log(response.text());
+    // Send message and get response
+    const result = await chat.sendMessage(prompt);
+    const response = result.response;
+    
+    return response.text();
 
-    try {
-        const result = await chat.sendMessage(prompt);
-        const response = result.response;
-        console.log(response.text());
-        return response.text();
-    } catch (error) {
-        console.error("Error during chat:", error);
-        throw error; // Re-throw the error for further handling if needed
+  } catch (error) {
+    console.error("Error in runChat:", error);
+    
+    // Return user-friendly error message
+    if (error.message.includes("API key not valid")) {
+      throw new Error("Invalid API key. Please check your configuration.");
+    } else if (error.message.includes("quota")) {
+      throw new Error("API quota exceeded. Please try again later.");
+    } else {
+      throw new Error("Failed to get response from AI. Please try again.");
     }
+  }
 }
 
 export default runChat;
