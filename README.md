@@ -1,12 +1,12 @@
-# React + Vite
+# Gemini-Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview of Gemini-Clone
 
-Currently, two official plugins are available:
+<img width="1919" height="945" alt="image" src="https://github.com/user-attachments/assets/6b46d0c0-02aa-445f-a4c0-5e23633d04e1" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img width="1919" height="950" alt="image" src="https://github.com/user-attachments/assets/2a6c58c1-e8c1-41a8-bf50-3032c87a60b6" />
 
-## Expanding the ESLint configuration
+<img width="1917" height="939" alt="image" src="https://github.com/user-attachments/assets/628987fd-d987-46c5-9120-2a231e851950" />
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<img width="1919" height="940" alt="image" src="https://github.com/user-attachments/assets/b2fc5ef9-48de-44f7-8fd3-dc833c8857cf" />
+
