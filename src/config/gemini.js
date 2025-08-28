@@ -1,15 +1,14 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 
-// Configuration
 const MODEL_NAME = "gemini-1.5-flash";
 const DEFAULT_API_KEY = "your-default-key-here"; // Remove this in production!
 
-// Get API key based on environment
+
 const API_KEY = import.meta.env?.VITE_GEMINI_API_KEY || DEFAULT_API_KEY;
 
 if (!API_KEY || API_KEY === "your-default-key-here") {
   console.error("API key is not properly configured");
-  // You might want to throw an error here in production
+  
 }
 
 async function runChat(prompt) {
@@ -57,7 +56,7 @@ async function runChat(prompt) {
       history: [],
     });
 
-    // Send message and get response
+    
     const result = await chat.sendMessage(prompt);
     const response = result.response;
     
@@ -66,7 +65,6 @@ async function runChat(prompt) {
   } catch (error) {
     console.error("Error in runChat:", error);
     
-    // Return user-friendly error message
     if (error.message.includes("API key not valid")) {
       throw new Error("Invalid API key. Please check your configuration.");
     } else if (error.message.includes("quota")) {
